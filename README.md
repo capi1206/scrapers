@@ -1,42 +1,48 @@
-medical-scrapers/                                                                                                                                                                            
-│                                                                                                                                                                                            
-├── scrapers/                   # individual scrapers                                                                                                                                        
-│   ├── __init__.py
-│   ├── base_scraper.py         # common scraper utilities (requests, retries, parsing)
-│   ├── directory1_scraper.py   # your first scraper here
-│   └── directory2_scraper.py   # next ones
-│
-├── api/                        # FastAPI service for Cloud Run
-│   ├── __init__.py
-│   ├── main.py                 # API entry point (FastAPI app)
-│   ├── routers/                # endpoints grouped by logic
-│   │   ├── __init__.py
-│   │   ├── doctors.py
-│   │   └── status.py
-│   ├── models/                 # Pydantic models (schemas for API & DB)
-│   │   ├── __init__.py
-│   │   ├── doctor.py
-│   │   └── base.py
-│   └── db.py                   # MySQL connection layer (SQLAlchemy)
-│
-├── tests/
-│   ├── __init__.py
-│   ├── test_scrapers.py        # unit tests for scraper functions
-│   ├── test_api.py             # tests API endpoints with TestClient
-│   └── test_db.py              # integration test with test DB
-│
-├── docker/
-│   ├── Dockerfile.api          # build for API service
-│   └── Dockerfile.scraper      # build for scrapers
-│
-├── scripts/
-│   └── run_scraper.py          # orchestrates scrapers, pushes to DB
-│
-│
-├── requirements.txt
-├── pyproject.toml              # if using poetry
-├── docker-compose.yml          # for local dev (MySQL + API + scraper)
-├── .github/workflows/ci.yml    # GitHub Actions for linting/tests
-├── .flake8                     # linting config
-├── openapi.yaml                # generated from FastAPI or hand-written
-└── README.md
+he repository is organized into a modular structure to separate scraping logic, API services, database integration, and infrastructure:
+
+scrapers/
+Contains the scraping modules for different medical directories. Each scraper is implemented in its own file, with a common base_scraper.py defining shared functionality.
+
+api/
+Houses the FastAPI service for exposing scraped data.
+
+main.py starts the FastAPI application.
+
+routes/ contains route definitions (e.g., doctors.py, status.py).
+
+models/ contains Pydantic models used for request/response schemas and database mappings (doctor.py, base.py).
+
+db.py defines the SQLAlchemy database connection layer.
+
+tests/
+Holds unit and integration tests.
+
+test_scrapers.py validates scraping functions.
+
+test_api.py tests API endpoints with FastAPI’s TestClient.
+
+test_db.py checks integration with a test database.
+
+docker/
+Includes Dockerfiles for building container images:
+
+Dockerfile.api for the API service.
+
+Dockerfile.scraper for the scraper services.
+
+scripts/
+Utility scripts for orchestration, such as run_scraper.py, which runs scrapers and writes results into the database.
+
+Top-level project files:
+
+requirements.txt lists dependencies (or pyproject.toml if using Poetry).
+
+docker-compose.yml spins up local services (MySQL, API, scrapers).
+
+.github/workflows/ci.yml defines CI/CD pipelines (linting, tests).
+
+.flake8 holds linting configuration.
+
+openapi.yaml documents the API schema (OpenAPI/Swagger).
+
+README.md explains setup, usage, and deployment instructions.
