@@ -1,6 +1,6 @@
-medical-scrapers/
+medical-scrapers/                                                                                                                                                                            
 │
-├── scrapers/                   # individual scrapers
+├── scrapers/                   # individual scrapers                                                                                                                                        
 │   ├── __init__.py
 │   ├── base_scraper.py         # common scraper utilities (requests, retries, parsing)
 │   ├── directory1_scraper.py   # your first scraper here
