@@ -1,5 +1,5 @@
 medical-scrapers/                                                                                                                                                                            
-│
+│                                                                                                                                                                                            
 ├── scrapers/                   # individual scrapers                                                                                                                                        
 │   ├── __init__.py
 │   ├── base_scraper.py         # common scraper utilities (requests, retries, parsing)
