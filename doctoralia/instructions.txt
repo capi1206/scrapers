@@ -1,0 +1,2 @@
+Build a bot to go to https://www.doctoralia.co/especialidades-medicas 
+redirect to each speciality, then on each speciality there is a list of the doctors, crawl there
