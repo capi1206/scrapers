@@ -1,48 +1,37 @@
-he repository is organized into a modular structure to separate scraping logic, API services, database integration, and infrastructure:
+The repository is organized into a modular structure to separate scraping logic, API services, database integration, and infrastructure:
 
-scrapers/
-Contains the scraping modules for different medical directories. Each scraper is implemented in its own file, with a common base_scraper.py defining shared functionality.
+- **`scrapers/`**  
+  Contains the scraping modules for different medical directories.  
+  - `base_scraper.py`: shared scraper functionality  
+  - `<site>_scraper.py`: individual scraper implementations  
 
-api/
-Houses the FastAPI service for exposing scraped data.
+- **`api/`**  
+  Houses the FastAPI service for exposing scraped data.  
+  - `main.py`: starts the FastAPI application  
+  - `routes/`: route definitions (`doctors.py`, `status.py`)  
+  - `models/`: Pydantic models for API & DB (`doctor.py`, `base.py`)  
+  - `db.py`: SQLAlchemy database connection  
 
-main.py starts the FastAPI application.
+- **`tests/`**  
+  Holds unit and integration tests.  
+  - `test_scrapers.py`: tests scraping functions  
+  - `test_api.py`: tests API endpoints with TestClient  
+  - `test_db.py`: integration tests with test DB  
 
-routes/ contains route definitions (e.g., doctors.py, status.py).
+- **`docker/`**  
+  Dockerfiles for container builds.  
+  - `Dockerfile.api`: API service image  
+  - `Dockerfile.scraper`: scraper service image  
 
-models/ contains Pydantic models used for request/response schemas and database mappings (doctor.py, base.py).
+- **`scripts/`**  
+  Utility scripts for orchestration.  
+  - `run_scraper.py`: runs scrapers and pushes results to DB  
 
-db.py defines the SQLAlchemy database connection layer.
-
-tests/
-Holds unit and integration tests.
-
-test_scrapers.py validates scraping functions.
-
-test_api.py tests API endpoints with FastAPI’s TestClient.
-
-test_db.py checks integration with a test database.
-
-docker/
-Includes Dockerfiles for building container images:
-
-Dockerfile.api for the API service.
-
-Dockerfile.scraper for the scraper services.
-
-scripts/
-Utility scripts for orchestration, such as run_scraper.py, which runs scrapers and writes results into the database.
-
-Top-level project files:
-
-requirements.txt lists dependencies (or pyproject.toml if using Poetry).
-
-docker-compose.yml spins up local services (MySQL, API, scrapers).
-
-.github/workflows/ci.yml defines CI/CD pipelines (linting, tests).
-
-.flake8 holds linting configuration.
-
-openapi.yaml documents the API schema (OpenAPI/Swagger).
-
-README.md explains setup, usage, and deployment instructions.
+- **Top-level files:**  
+  - `requirements.txt`: Python dependencies  
+  - `pyproject.toml`: alternative dependency management (Poetry)  
+  - `docker-compose.yml`: local dev environment (MySQL + API + scrapers)  
+  - `.github/workflows/ci.yml`: GitHub Actions CI/CD pipeline  
+  - `.flake8`: linting configuration  
+  - `openapi.yaml`: OpenAPI/Swagger documentation  
+  - `README.md`: project documentation 
